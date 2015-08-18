@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html;charset=gdk" >
+<TITLE>we</TITLE>
+
+<style type="text/css">
+  *{margin:0;padding:0;}
+  body{background:url("55.png") no-repeat top center; font-size:12px;font-family:"微软雅黑"; }
+  /*d_screen start*/
+ .dm{width:100%;height:100%;position:absolute;top:0;left:0;display:none;}
+ .dm .d_screen 
+ .d_del{width:38px;height:38px;background:#600;display:block;text-align:center;line-height:38px;
+  text-decoration:none;font-size:20px;color:#fff;border-radius:19px;border:1px solid #fff;position:absolute;top:10px;right:20px;z-index:3;display:none;}
+ .dm .d_screen .d_del:hover{background:#f00;}
+ .dm .d_screen .d_mask{width:100%;height:100%;background:#000;position:absolute;top:0;left:0;opacity:0.5;
+ filter:alpha(opacity=50) z-index:1;}
+ .dm .d_screen .d_show{position: relative;z-index:2;}
+ .dm .d_screen .d_show div{font-size:22px;line-height:36px;font-weight:500;color:#fff;position:absolute;left:0;top:0;}
+  /*end d_scree*/
+
+   /*.send start*/
+ .send{width:100%;height:76px;position:absolute;bottom:0;left:0;}
+ .send .s_fiter{width:100%;height:76px;background:#000;position:bottom:0;left:0;opacity:0.8;filter:alpha(opacity=80);}
+ .send .s_con{width:100%;height:76px;position:absolute;top:0;left:0;z-index:2;text-align:center;line-height:76px;}
+ .send .s_con 
+ .s_txt{width:605px;height:36px;border-radius:4px 0 0 4px;outline:none;border:1px solid #5bba32;}
+ .send .s_con .s_sub{width:100px;height:37px;background:#65c33d;border:0;outline:none;font-size:14px;color:#fff;font-family:"微软雅黑";cursor:pointer;border-radius:0 4px 4px 0;border:1px solid #5bba32;}
+ .send .s_con .s_sub:hover{background:#3eaf0e;}
+  /*end .send*/
+</style>
+</head>
+<body>
+<center><br><br><br>
+<h1><div id="time"></div></h1>
+</center>
+<!--dm start-->
+	<div class="dm">
+	<!--d_screen start-->
+		<div class="d_screen">
+			<!--<a href="#" class="d_del">X</a>-->
+			<div class="d_mask"></div>
+			<div class="d_show">
+				<div>-你是变态吗？<br>-我是啊！</div>
+				<div>毛主席的像，挂在墙上。</div>
+				<div>啦~啦~啦~~~</div>
+				<div>都不让人吃饱！</div>
+				<div>一巴掌呼你姥姥家去</div>
+				<div>好好赚钱，存好多好多钱</div>
+				<div><img src="2.gif"></div>
+				<div>好好玩啊</div>
+				<div>嘿嘿，糖醋排骨，我的最爱</div>
+				<div>select * from </div>
+				<div>那你得给钱~</div>
+				<div>我画个圈圈诅咒你</div>
+
+				<div>那个问题我找到原因了。。<br>不知道怎么处理</div>
+
+			</div>
+		</div>
+		<!--end d_screen-->
+
+		<!--send start-->
+		<div class="send">
+			<div class="s_fiter">
+				<div class="s_con">
+					<input type="text" class="s_txt"/><input type="button" value="添加" class="s_sub"/>
+				</div>
+			</div>
+		</div> 
+		<!--end send-->
+	</div>
+	<!--end dm-->
+
+<!--引入类库-->
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".dm,.d_del").toggle(1000);
+		init_screen();
+	
+		//alert("您好");
+		//$("#btn,.d_del").click(function(){
+		//	$(".dm,.d_del").toggle(1000);
+		//});
+		$(".s_sub").click(function(){
+		   var text=$(".s_txt").val();
+		   var div="<div>"+text+"</div>";
+		   $(".d_show").append(div);
+		   init_screen();
+		})
+
+
+		var oldTime = (new Date("2012/06/11 00:00:00")).getTime(); //得到毫秒数
+		var newTime = new Date(oldTime); //就得到普通的时间了
+		var date1=new Date();  //开始时间
+		
+		var date3=date1.getTime()-oldTime  //时间差的毫秒数
+ 
+
+		//计算出相差天数
+		var days=Math.floor(date3/(24*3600*1000))
+ 	   	//days = days+1;
+		//计算出小时数
+
+		var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+		var hours=Math.floor(leave1/(3600*1000))
+		//计算相差分钟数
+		var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+		var minutes=Math.floor(leave2/(60*1000))
+ 
+
+		//计算相差秒数
+		var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+		var seconds=Math.round(leave3/1000)
+ 
+
+		//alert(" 相差 "+days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+		var show = document.getElementById("time");
+		show.innerHTML=" 今天是我们的第 "+days+"天 ";
+	});
+//初始化弹幕
+
+	function init_screen(){
+		var _top=0;
+		$(".d_show").find("div").show().each(function(){
+			var _left=$(window).width()-$(this).width();
+			var _height=$(window).height();
+
+			_top=_top+76;
+			if(_top>=_height-100){
+				_top=0;
+			}
+
+			$(this).css({left:_left,top:_top,color:getReandomColor()});
+			var time=50000;
+			if($(this).index()%2==0){
+				time=100000;
+			}
+			if($(this).index()%3==0){
+				time=70000;
+			}
+			if($(this).index()%4==0){
+				time=60000;
+			}
+			if($(this).index()%5==0){
+				time=120000;
+			}
+			if($(this).index()%6==0){
+				time=50000;
+			}
+			if($(this).index()%7==0){
+				time=30000;
+			}
+			
+			$(this).animate({left:"-"+_left+"px"},time,function(){
+				init_screen();
+			
+			});
+		
+		});
+	}
+
+	//随机获取颜色值
+	function getReandomColor(){
+		return '#'+(function(h){
+		return new Array(7-h.length).join("0")+h
+		})((Math.random()*0x1000000<<0).toString(16))
+	}
+</script>
+
+<div style="text-align:center;margin:150px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+</body>
+</html>
