@@ -1,8 +1,8 @@
 ﻿<!doctype html>
 <html>
 <head>
-<meta http-equiv="content-Type" content="text/html;charset=gdk" >
-<TITLE>we</TITLE>
+<meta http-equiv="content-Type" content="text/html;charset=utf-8" >
+<title>we</title>
 
 <style type="text/css">
   *{margin:0;padding:0;}
@@ -55,6 +55,8 @@
 				<div>我画个圈圈诅咒你</div>
 				<div><br>困得不能行了都~</div>
 				<div>那个问题我找到原因了。。<br>不知道怎么处理</div>
+				<div>我跟我妈说，你打我。。。</div>
+				<div>气死你</div>
 
 			</div>
 		</div>
@@ -118,6 +120,7 @@
 		//alert(" 相差 "+days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
 		var show = document.getElementById("time");
 		show.innerHTML=" 今天是我们的第 "+days+"天 ";
+		document.title=" 今天是我们的第 "+days+"天 ";
 	});
 //初始化弹幕
 
@@ -134,7 +137,9 @@
 
 			$(this).css({left:_left,top:_top,color:getReandomColor()});
 			var time=50000;
-			if($(this).index()%2==0){
+			var r = Math.random();
+			time = r*100000;
+			/* if($(this).index()%2==0){
 				time=100000;
 			}
 			if($(this).index()%3==0){
@@ -151,7 +156,7 @@
 			}
 			if($(this).index()%7==0){
 				time=30000;
-			}
+			} */
 			
 			$(this).animate({left:"-"+_left+"px"},time,function(){
 				init_screen();
